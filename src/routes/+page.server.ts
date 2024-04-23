@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import { RATE_LIMIT_SECRET } from '$env/static/private';
 import { db } from '$lib/db.js';
 import { clicks, stats_table } from '$lib/schema.js';
@@ -28,7 +29,7 @@ export const load = async (event) => {
 
 export const actions = {
 	default: async (event) => {
-		if (await limiter.isLimited(event)) {
+		if (!dev && (await limiter.isLimited(event))) {
 			return { success: false, message: 'Rate limit exceeded' };
 		}
 
