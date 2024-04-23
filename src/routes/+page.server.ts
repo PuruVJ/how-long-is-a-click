@@ -1,7 +1,7 @@
 import { RATE_LIMIT_SECRET } from '$env/static/private';
 import { db } from '$lib/db.js';
-import { clicks } from '$lib/schema.js';
-import { sql } from 'drizzle-orm';
+import { clicks, stats_table } from '$lib/schema.js';
+import { eq, sql } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
 import { RateLimiter } from 'sveltekit-rate-limiter/server';
 
@@ -21,19 +21,10 @@ const limiter = new RateLimiter({
 export const load = async (event) => {
 	await limiter.cookieLimiter?.preflight(event);
 
-	const [avg, category_average] = await db.batch([
-		db.select({ average_duration: sql<number>`AVG(duration)`, count: sql`COUNT(*)` }).from(clicks),
-		db
-			.select({
-				pointer_type: clicks.pointer_type,
-				average_duration: sql<number>`AVG(duration)`,
-				count: sql<number>`COUNT(*)`,
-			})
-			.from(clicks)
-			.groupBy(clicks.pointer_type),
-	]);
+	const data = await db.select().from(stats_table);
+	console.log(data);
 
-	return { average: avg[0], category_average };
+	return { rows: data };
 };
 
 export const actions = {
@@ -43,18 +34,57 @@ export const actions = {
 		}
 
 		const formdata = await event.request.formData();
-		const time = formdata.get('duration');
+		const duration = formdata.get('duration');
 		const pointer_type = formdata.get('pointer-type');
 
 		try {
-			await db.insert(clicks).values({
-				id: nanoid(15),
-				duration: time,
-				pointer_type: pointer_type,
+			console.time('txn');
+			await db.transaction(async (tx) => {
+				await tx.insert(clicks).values({
+					id: nanoid(15),
+					duration,
+					pointer_type,
+				});
+
+				// Update all stats
+				await tx
+					.insert(stats_table)
+					.values({
+						type: 'all',
+						average_duration: +duration?.toString()!,
+						count: 1,
+					})
+					.onConflictDoUpdate({
+						target: stats_table.type,
+						set: {
+							average_duration: sql<number>`(average_duration * count + ${duration}) / (count + 1)`,
+							count: sql<number>`count + 1`,
+						},
+						setWhere: eq(stats_table.type, 'all'),
+					});
+
+				// Now update the row whose type is point_type, then update that too
+				await tx
+					.insert(stats_table)
+					.values({
+						type: pointer_type?.toString()!,
+						average_duration: +duration?.toString()!,
+						count: 1,
+					})
+					.onConflictDoUpdate({
+						target: stats_table.type,
+						set: {
+							average_duration: sql<number>`(average_duration * count + ${duration}) / (count + 1)`,
+							count: sql<number>`count + 1`,
+						},
+						setWhere: eq(stats_table.type, pointer_type?.toString()!),
+					});
 			});
+			console.timeEnd('txn');
 
 			return { success: true, message: 'Click recorded 🦄' };
-		} catch {
+		} catch (e) {
+			console.log(e);
 			return { success: false, message: 'Failed to record click' };
 		}
 	},

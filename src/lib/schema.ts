@@ -9,3 +9,9 @@ export const clicks = sqliteTable('clicks', {
 		.notNull()
 		.default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const stats_table = sqliteTable('stats', {
+	type: text('type').notNull().primaryKey(),
+	average_duration: integer('average_duration', { mode: 'number' }).notNull(),
+	count: integer('count', { mode: 'number' }).notNull(),
+});

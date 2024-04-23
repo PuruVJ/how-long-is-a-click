@@ -46,15 +46,9 @@
 <hr />
 
 <section class="stats">
-	<div class="average" use:draggable>
-		<p>Average</p>
-		<h2>{Math.floor(data.average.average_duration)}</h2>
-		{data.average.count} clicks
-	</div>
-
-	{#each data.category_average as { pointer_type, average_duration, count }}
+	{#each data.rows as { type, average_duration, count }}
 		<div class="average" use:draggable>
-			<p>{pointer_type}</p>
+			<p>{type}</p>
 			<h2>{Math.floor(average_duration)}</h2>
 			{count}
 		</div>
