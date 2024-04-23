@@ -22,7 +22,6 @@ export const load = async (event) => {
 	await limiter.cookieLimiter?.preflight(event);
 
 	const data = await db.select().from(stats_table);
-	console.log(data);
 
 	return { rows: data };
 };
