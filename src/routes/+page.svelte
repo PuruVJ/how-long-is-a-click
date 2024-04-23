@@ -41,6 +41,8 @@
 	<button type="submit" on:pointerdown={onDown} on:pointerup={onUp}> Click me 🦄 </button>
 </form>
 
+<h3>{Math.floor(duration)}ms</h3>
+
 <hr />
 
 <section class="stats">
@@ -58,6 +60,12 @@
 		</div>
 	{/each}
 </section>
+
+<footer>
+	By <a href="https://x.com/puruvjdev">@puruvjdev</a> •
+	<a target="_blank" rel="noreferrer" href="https://github.com/puruvj/how-long-is-a-click">Source</a
+	>
+</footer>
 
 <style>
 	button {
