@@ -31,7 +31,7 @@
 	}}
 	method="post"
 >
-	<h1 use:draggable>How long does a click take?</h1>
+	<h1 use:draggable>How long is a click?</h1>
 
 	<br /><br />
 
