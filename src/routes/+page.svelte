@@ -57,7 +57,7 @@
 
 <footer>
 	By <a href="https://x.com/puruvjdev">@puruvjdev</a> •
-	<a target="_blank" rel="noreferrer" href="https://github.com/puruvj/how-long-is-a-click">Source</a
+	<a target="_blank" rel="noreferrer" href="https://github.com/puruvj/how-long-is-a-click">source</a
 	>
 </footer>
 
