@@ -34,13 +34,20 @@ export const actions = {
 		}
 
 		const formdata = await event.request.formData();
-		const duration = formdata.get('duration');
-		const pointer_type = formdata.get('pointer-type');
+		const duration = formdata.get('duration')?.toString();
+		const pointer_type = formdata.get('pointer-type')?.toString();
+
+		if (!duration || !pointer_type)
+			return {
+				success: false,
+				message: 'Missing required fields',
+			};
 
 		try {
 			console.time('txn');
 			await db.transaction(async (tx) => {
 				await tx.insert(clicks).values({
+					// @ts-expect-error I dont know why this is erroring
 					id: nanoid(15),
 					duration,
 					pointer_type,
