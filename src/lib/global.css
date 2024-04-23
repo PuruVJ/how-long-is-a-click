@@ -1,0 +1,15 @@
+/* the props */
+@import 'open-props/style';
+
+/* optional imports that use the props */
+@import 'open-props/normalize/dark';
+@import 'open-props/buttons';
+
+body {
+	/* background-image: var(--gradient-25); */
+	background-color: var(--grey-9);
+	display: grid;
+	place-items: center;
+
+	height: 100%;
+}
