@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { toast } from 'svelte-french-toast';
+	import { invalidateAll } from '$app/navigation';
 	import { draggable } from '@neodrag/svelte';
+	import { onMount } from 'svelte';
+	import { toast } from 'svelte-french-toast';
 
 	export let data;
 
@@ -18,6 +20,12 @@
 	function onUp() {
 		duration = performance.now() - start_time;
 	}
+
+	onMount(() => {
+		setInterval(() => {
+			invalidateAll();
+		}, 5000);
+	});
 </script>
 
 <form
