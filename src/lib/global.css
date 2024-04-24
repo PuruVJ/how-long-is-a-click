@@ -12,4 +12,6 @@ body {
 	place-items: center;
 
 	height: 100%;
+
+	touch-action: manipulation;
 }

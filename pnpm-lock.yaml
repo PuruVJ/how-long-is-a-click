@@ -14,6 +14,9 @@ importers:
       '@neodrag/svelte':
         specifier: ^2.0.6
         version: 2.0.6
+      '@wessberg/pointer-events':
+        specifier: ^1.0.9
+        version: 1.0.9
       drizzle-orm:
         specifier: ^0.30.9
         version: 0.30.9(@libsql/client@0.6.0)
@@ -728,6 +731,10 @@ packages:
     resolution: {integrity: sha512-j4jCOOXke2t8cHZCIxu1dzKLHLcFmYzC3yqAK6MfZznOL1QIJKd0xcFsXK3zcqzU7ScsE2zWkiMMNHGMHgp+FA==}
     engines: {node: '>=16'}
     hasBin: true
+
+  '@wessberg/pointer-events@1.0.9':
+    resolution: {integrity: sha512-fTOBNzakyi3wBXMmQ1mpAibU3lCbXVWSwgM9nsjtlfbJ5MH1yvteCZgZF+TDQWNtTPg8JWuQUjBF7+8cKoj92A==}
+    engines: {node: '>=4.0.0'}
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -2104,6 +2111,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@wessberg/pointer-events@1.0.9': {}
 
   abbrev@1.1.1: {}
 
