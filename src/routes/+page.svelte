@@ -5,12 +5,12 @@
 	import { onMount } from 'svelte';
 	import { toast } from 'svelte-french-toast';
 
-	export let data;
+	const { data } = $props();
 
-	let start_time: number;
-	let duration = 0;
+	let start_time = $state<number>(0);
+	let duration = $state(0);
 
-	let pointer_type = '';
+	let pointer_type = $state('');
 
 	function onDown(e: PointerEvent) {
 		start_time = performance.now();
