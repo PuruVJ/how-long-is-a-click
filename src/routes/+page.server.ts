@@ -45,16 +45,16 @@ export const actions = {
 
 		try {
 			console.time('txn');
-			await db.transaction(async (tx) => {
-				await tx.insert(clicks).values({
+			await db.batch([
+				db.insert(clicks).values({
 					// @ts-expect-error I dont know why this is erroring
 					id: nanoid(15),
 					duration,
 					pointer_type,
-				});
+				}),
 
 				// Update all stats
-				await tx
+				db
 					.insert(stats_table)
 					.values({
 						type: 'all',
@@ -68,10 +68,10 @@ export const actions = {
 							count: sql<number>`count + 1`,
 						},
 						setWhere: eq(stats_table.type, 'all'),
-					});
+					}),
 
 				// Now update the row whose type is point_type, then update that too
-				await tx
+				db
 					.insert(stats_table)
 					.values({
 						type: pointer_type?.toString()!,
@@ -85,8 +85,8 @@ export const actions = {
 							count: sql<number>`count + 1`,
 						},
 						setWhere: eq(stats_table.type, pointer_type?.toString()!),
-					});
-			});
+					}),
+			]);
 			console.timeEnd('txn');
 
 			return { success: true, message: 'Click recorded 🦄' };
