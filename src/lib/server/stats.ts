@@ -1,5 +1,5 @@
 import { POINTER_TYPES } from '$lib/constants';
-import { stats_table } from '$lib/schema';
+import { stats_table } from '$lib/server/schema';
 import { db } from './db';
 
 export async function get_stats() {

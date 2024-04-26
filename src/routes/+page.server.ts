@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 import { RATE_LIMIT_SECRET } from '$env/static/private';
 import { POINTER_TYPES } from '$lib/constants.js';
-import { clicks, stats_table } from '$lib/schema.js';
+import { clicks, stats_table } from '$lib/server/schema.js';
 import { db } from '$lib/server/db.js';
 import { get_stats } from '$lib/server/stats.js';
 import { eq, sql } from 'drizzle-orm';

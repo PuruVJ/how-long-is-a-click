@@ -1,7 +1,7 @@
 import { createClient } from '@libsql/client';
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
-import * as schema from './src/lib/schema';
+import * as schema from './src/lib/server/schema';
 import { eq } from 'drizzle-orm';
 
 const { DB_TOKEN, DB_URL } = process.env;

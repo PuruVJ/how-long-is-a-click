@@ -11,7 +11,7 @@ import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
 import fs from 'node:fs/promises';
 import { ulid } from 'ulid';
-import * as schema from './src/lib/schema';
+import * as schema from './src/lib/server/schema';
 
 const pointer_types = ['mouse', 'touch', 'pen', 'eraser', 'other'];
 
