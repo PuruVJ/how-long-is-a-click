@@ -28,6 +28,14 @@
 	});
 </script>
 
+<svelte:head>
+	<meta
+		property="twitter:image"
+		content="https://how-long-is-a-click.com/social.png?{Date.now()}"
+	/>
+	<meta property="og:image" content="https://how-long-is-a-click.com/social.png?{Date.now()}" />
+</svelte:head>
+
 <form
 	use:enhance={() => {
 		return async ({ update, result }) => {
