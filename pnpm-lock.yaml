@@ -20,9 +20,6 @@ importers:
       drizzle-orm:
         specifier: ^0.30.9
         version: 0.30.9(@libsql/client@0.6.0)
-      nanoid:
-        specifier: ^5.0.7
-        version: 5.0.7
       open-props:
         specifier: ^1.7.3
         version: 1.7.3
@@ -32,6 +29,9 @@ importers:
       sveltekit-rate-limiter:
         specifier: ^0.5.1
         version: 0.5.1(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.113)(vite@5.2.10(@types/node@20.12.7)))(svelte@5.0.0-next.113)(vite@5.2.10(@types/node@20.12.7)))
+      ulid:
+        specifier: ^2.3.0
+        version: 2.3.0
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -1274,11 +1274,6 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.0.7:
-    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-
   next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
 
@@ -1553,6 +1548,10 @@ packages:
   typescript@5.4.5:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
+    hasBin: true
+
+  ulid@2.3.0:
+    resolution: {integrity: sha512-keqHubrlpvT6G2wH0OEfSW4mquYRcbe/J8NMmveoQOjUqmo+hXtO+ORCpWhdbZ7k72UtY61BL7haGxW6enBnjw==}
     hasBin: true
 
   undici-types@5.26.5:
@@ -2657,8 +2656,6 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nanoid@5.0.7: {}
-
   next-tick@1.1.0: {}
 
   node-domexception@1.0.0: {}
@@ -2937,6 +2934,8 @@ snapshots:
   type@2.7.2: {}
 
   typescript@5.4.5: {}
+
+  ulid@2.3.0: {}
 
   undici-types@5.26.5: {}
 

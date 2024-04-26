@@ -29,9 +29,9 @@
 		"@neodrag/svelte": "^2.0.6",
 		"@wessberg/pointer-events": "^1.0.9",
 		"drizzle-orm": "^0.30.9",
-		"nanoid": "^5.0.7",
 		"open-props": "^1.7.3",
 		"svelte-french-toast": "^1.2.0",
-		"sveltekit-rate-limiter": "^0.5.1"
+		"sveltekit-rate-limiter": "^0.5.1",
+		"ulid": "^2.3.0"
 	}
 }

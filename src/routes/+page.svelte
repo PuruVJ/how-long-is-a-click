@@ -46,7 +46,7 @@
 	<input type="hidden" name="duration" value={duration} />
 	<input type="hidden" name="pointer-type" value={pointer_type} />
 
-	<button type="submit" on:pointerdown={onDown} on:pointerup={onUp}> Click me 🦄 </button>
+	<button type="submit" onpointerdown={onDown} onpointerup={onUp}> Click me 🦄 </button>
 </form>
 
 <h3>{Math.floor(duration)}ms</h3>

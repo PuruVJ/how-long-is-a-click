@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1714133938284,
+      "tag": "0000_cooing_wild_pack",
+      "breakpoints": true
+    }
+  ]
+}
