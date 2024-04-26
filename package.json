@@ -27,9 +27,12 @@
 	"dependencies": {
 		"@libsql/client": "^0.6.0",
 		"@neodrag/svelte": "^2.0.6",
+		"@resvg/resvg-js": "^2.6.2",
 		"@wessberg/pointer-events": "^1.0.9",
 		"drizzle-orm": "^0.30.9",
 		"open-props": "^1.7.4",
+		"satori": "^0.10.13",
+		"satori-html": "^0.3.2",
 		"svelte-french-toast": "^1.2.0",
 		"sveltekit-rate-limiter": "^0.5.1",
 		"ulid": "^2.3.0"

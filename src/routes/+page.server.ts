@@ -1,12 +1,12 @@
 import { dev } from '$app/environment';
 import { RATE_LIMIT_SECRET } from '$env/static/private';
-import { db } from '$lib/db.js';
+import { POINTER_TYPES } from '$lib/constants.js';
 import { clicks, stats_table } from '$lib/schema.js';
-import { count, eq, sql } from 'drizzle-orm';
-import { ulid } from 'ulid';
+import { db } from '$lib/server/db.js';
+import { get_stats } from '$lib/server/stats.js';
+import { eq, sql } from 'drizzle-orm';
 import { RateLimiter } from 'sveltekit-rate-limiter/server';
-
-const pointer_types = ['mouse', 'touch', 'pen', 'eraser', 'other'];
+import { ulid } from 'ulid';
 
 const limiter = new RateLimiter({
 	// A rate is defined as [number, unit]
@@ -24,28 +24,8 @@ const limiter = new RateLimiter({
 export const load = async (event) => {
 	await limiter.cookieLimiter?.preflight(event);
 
-	const data = await db.select().from(stats_table);
-
-	let average_duration_sum = 0;
-	let total_count = 0;
-	for (const row of data) {
-		average_duration_sum += row.count * row.average_duration;
-		total_count += row.count;
-	}
-
 	return {
-		rows: [
-			{
-				type: 'all',
-				average_duration: Math.floor(average_duration_sum / total_count),
-				count: total_count,
-			},
-			...data.map((r) => ({
-				...r,
-				type: pointer_types[r.type],
-				average_duration: Math.floor(r.average_duration),
-			})),
-		],
+		rows: await get_stats(),
 	};
 };
 
@@ -73,7 +53,7 @@ export const actions = {
 		}
 
 		const pointer_type_num =
-			(pointer_types.indexOf(pointer_type!) + pointer_types.length) % pointer_types.length;
+			(POINTER_TYPES.indexOf(pointer_type!) + POINTER_TYPES.length) % POINTER_TYPES.length;
 
 		try {
 			console.time('txn');
