@@ -66,6 +66,7 @@
 	.average {
 		flex: 1 1 auto;
 		flex-direction: column;
+		align-items: center;
 		padding: 2rem;
 		cursor: move;
 	}
