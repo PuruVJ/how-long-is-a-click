@@ -9,10 +9,9 @@
 import { createClient } from '@libsql/client';
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
-import * as schema from './src/lib/schema';
-import { eq } from 'drizzle-orm';
 import fs from 'node:fs/promises';
-import { ulid, decodeTime } from 'ulid';
+import { ulid } from 'ulid';
+import * as schema from './src/lib/schema';
 
 const pointer_types = ['mouse', 'touch', 'pen', 'eraser', 'other'];
 

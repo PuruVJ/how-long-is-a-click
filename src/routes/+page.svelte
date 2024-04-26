@@ -57,7 +57,7 @@
 	{#each data.rows as { type, average_duration, count }}
 		<div class="average" use:draggable>
 			<p>{type}</p>
-			<h2>{Math.floor(average_duration)}</h2>
+			<h2>{average_duration}</h2>
 			{count}
 		</div>
 	{/each}

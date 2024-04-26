@@ -2,7 +2,7 @@ import { dev } from '$app/environment';
 import { RATE_LIMIT_SECRET } from '$env/static/private';
 import { db } from '$lib/db.js';
 import { clicks, stats_table } from '$lib/schema.js';
-import { eq, sql } from 'drizzle-orm';
+import { count, eq, sql } from 'drizzle-orm';
 import { ulid } from 'ulid';
 import { RateLimiter } from 'sveltekit-rate-limiter/server';
 
@@ -26,7 +26,23 @@ export const load = async (event) => {
 
 	const data = await db.select().from(stats_table);
 
-	return { rows: data };
+	let average_duration_sum = 0;
+	let total_count = 0;
+	for (const row of data) {
+		average_duration_sum += row.count * row.average_duration;
+		total_count += row.count;
+	}
+
+	return {
+		rows: [
+			{
+				type: 'all',
+				average_duration: Math.floor(average_duration_sum / total_count),
+				count: total_count,
+			},
+			...data.map((r) => ({ ...r, type: pointer_types[r.type] })),
+		],
+	};
 };
 
 export const actions = {
@@ -61,15 +77,15 @@ export const actions = {
 				db.insert(clicks).values({
 					id: ulid(Date.now()),
 					duration: +duration,
-					pointer_type: pointer_type_num,
+					pointer_type: +pointer_type_num,
 				}),
 
 				// Now update the row whose type is point_type, then update that too
 				db
 					.insert(stats_table)
 					.values({
-						type: +pointer_type,
-						average_duration: +duration?.toString()!,
+						type: pointer_type_num,
+						average_duration: +duration,
 						count: 1,
 					})
 					.onConflictDoUpdate({
