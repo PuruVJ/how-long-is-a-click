@@ -95,7 +95,7 @@ export const actions = {
 					.onConflictDoUpdate({
 						target: stats_table.type,
 						set: {
-							average_duration: sql<number>`floor((average_duration * count + ${duration}) / (count + 1))`,
+							average_duration: sql<number>`(average_duration * count + ${+duration}) / (count + 1)`,
 							count: sql<number>`count + 1`,
 						},
 						setWhere: eq(stats_table.type, pointer_type_num),

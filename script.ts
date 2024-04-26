@@ -19,8 +19,9 @@ const db = drizzle(libsql_client, { schema });
 await db.transaction(async (tx) => {
 	const query = await db.select().from(schema.clicks).all();
 
-	const mouse_clicks = query.filter((row) => row.pointer_type === 'mouse');
-	const touch_clicks = query.filter((row) => row.pointer_type === 'touch');
+	const mouse_clicks = query.filter((row) => row.pointer_type === 0);
+	const touch_clicks = query.filter((row) => row.pointer_type === 1);
+	const pen_clicks = query.filter((row) => row.pointer_type === 2);
 
 	// Calculate the average duration of mouse clicks
 	const mouse_average =
@@ -30,13 +31,16 @@ await db.transaction(async (tx) => {
 	const touch_average =
 		touch_clicks.reduce((acc, row) => acc + row.duration, 0) / touch_clicks.length;
 
+	// Calculate the average duration of pen clicks
+	const pen_average = pen_clicks.reduce((acc, row) => acc + row.duration, 0) / pen_clicks.length;
+
 	await tx
 		.update(schema.stats_table)
 		.set({
 			average_duration: mouse_average,
 			count: mouse_clicks.length,
 		})
-		.where(eq(schema.stats_table.type, 'mouse'));
+		.where(eq(schema.stats_table.type, 0));
 
 	await tx
 		.update(schema.stats_table)
@@ -44,15 +48,13 @@ await db.transaction(async (tx) => {
 			average_duration: touch_average,
 			count: touch_clicks.length,
 		})
-		.where(eq(schema.stats_table.type, 'touch'));
+		.where(eq(schema.stats_table.type, 1));
 
-	// Also set type === 'all' to the average of all clicks
-	const all_average = query.reduce((acc, row) => acc + row.duration, 0) / query.length;
 	await tx
 		.update(schema.stats_table)
 		.set({
-			average_duration: all_average,
-			count: query.length,
+			average_duration: pen_average,
+			count: pen_clicks.length,
 		})
-		.where(eq(schema.stats_table.type, 'all'));
+		.where(eq(schema.stats_table.type, 2));
 });
