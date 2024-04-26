@@ -40,7 +40,11 @@ export const load = async (event) => {
 				average_duration: Math.floor(average_duration_sum / total_count),
 				count: total_count,
 			},
-			...data.map((r) => ({ ...r, type: pointer_types[r.type] })),
+			...data.map((r) => ({
+				...r,
+				type: pointer_types[r.type],
+				average_duration: Math.floor(r.average_duration),
+			})),
 		],
 	};
 };
