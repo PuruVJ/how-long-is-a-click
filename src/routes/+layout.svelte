@@ -13,4 +13,6 @@
 
 <slot />
 
-<Toaster position="bottom-right" />
+{#await Promise.resolve() then _}
+	<Toaster position="bottom-right" />
+{/await}

@@ -21,8 +21,8 @@ importers:
         specifier: ^0.30.9
         version: 0.30.9(@libsql/client@0.6.0)
       open-props:
-        specifier: ^1.7.3
-        version: 1.7.3
+        specifier: ^1.7.4
+        version: 1.7.4
       svelte-french-toast:
         specifier: ^1.2.0
         version: 1.2.0(svelte@5.0.0-next.115)
@@ -55,8 +55,8 @@ importers:
         specifier: 5.0.0-next.115
         version: 5.0.0-next.115
       svelte-check:
-        specifier: ^3.6.0
-        version: 3.6.9(postcss@8.4.38)(svelte@5.0.0-next.115)
+        specifier: ^3.7.0
+        version: 3.7.0(postcss@8.4.38)(svelte@5.0.0-next.115)
       tslib:
         specifier: ^2.4.1
         version: 2.6.2
@@ -1317,8 +1317,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  open-props@1.7.3:
-    resolution: {integrity: sha512-AzTMcnpVEM06oUUhcJmM5Ip0V7S/lSNBKKGz9R6Q8W3wRuJcgEQgXNl4l1K8/STyKWgs9F/2a2dQzq9RTUfMWg==}
+  open-props@1.7.4:
+    resolution: {integrity: sha512-LfzWOJq4I79GxtpT1/CucxujndqWjAdcC2H6gSJo1TmFGzyGv1VJWJQ1BQnui0/YgTNI+AaG1pEcq5/DCGL8RQ==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -1450,8 +1450,8 @@ packages:
     resolution: {integrity: sha512-8iGv75BYOa0xRJHK5vRLEjE2H/i4lulTjzpUXic3Eg8akftYjkmQDa8JARQ42rlczXyFR3IeRoeFCc7RxHsYZA==}
     engines: {node: '>=16'}
 
-  svelte-check@3.6.9:
-    resolution: {integrity: sha512-hDQrk3L0osX07djQyMiXocKysTLfusqi8AriNcCiQxhQR49/LonYolcUGMtZ0fbUR8HTR198Prrgf52WWU9wEg==}
+  svelte-check@3.7.0:
+    resolution: {integrity: sha512-Va6sGL4Vy4znn0K+vaatk98zoBvG2aDee4y3r5X4S80z8DXfbACHvdLlyXa4C4c5tQzK9H0Uq2pbd20wH3ucjQ==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
@@ -2691,7 +2691,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  open-props@1.7.3: {}
+  open-props@1.7.4: {}
 
   parent-module@1.0.1:
     dependencies:
@@ -2834,7 +2834,7 @@ snapshots:
     dependencies:
       copy-anything: 3.0.5
 
-  svelte-check@3.6.9(postcss@8.4.38)(svelte@5.0.0-next.115):
+  svelte-check@3.7.0(postcss@8.4.38)(svelte@5.0.0-next.115):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.6.0
