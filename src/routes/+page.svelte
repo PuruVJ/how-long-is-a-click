@@ -5,12 +5,12 @@
 	import { onMount } from 'svelte';
 	import { toast } from 'svelte-french-toast';
 
-	const { data } = $props();
+	export let data;
 
-	let start_time = $state<number>(0);
-	let duration = $state(0);
+	let start_time = 0;
+	let duration = 0;
 
-	let pointer_type = $state('');
+	let pointer_type = '';
 
 	function onDown(e: PointerEvent) {
 		start_time = performance.now();
@@ -46,7 +46,7 @@
 	<input type="hidden" name="duration" value={duration} />
 	<input type="hidden" name="pointer-type" value={pointer_type} />
 
-	<button type="submit" onpointerdown={onDown} onpointerup={onUp}> Click me 🦄 </button>
+	<button type="submit" on:pointerdown={onDown} on:pointerup={onUp}> Click me 🦄 </button>
 </form>
 
 <h3>{Math.floor(duration)}ms</h3>
