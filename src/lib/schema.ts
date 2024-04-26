@@ -7,7 +7,7 @@ export const clicks = sqliteTable('clicks', {
 });
 
 export const stats_table = sqliteTable('stats', {
-	type: integer('duration', { mode: 'number' }).notNull().primaryKey(),
+	type: integer('type', { mode: 'number' }).notNull().primaryKey(),
 	average_duration: integer('average_duration', { mode: 'number' }).notNull(),
 	count: integer('count', { mode: 'number' }).notNull(),
 });

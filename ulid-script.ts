@@ -51,38 +51,38 @@ async function populate_new_data() {
 		await fs.readFile('./data.json', 'utf-8')
 	) as (typeof schema.clicks.$inferSelect)[];
 
-	await db.transaction(async (tx) => {
-		// Write to the table
-		await tx.insert(schema.clicks).values(data);
+	// Write to the table
+	// for (const datum of data) {
+	await db.insert(schema.clicks).values(data);
+	// }
 
-		// Now recalculating the stats from the pointer_type until now
-		const groups = data.reduce((acc, row) => {
-			if (!acc[row.pointer_type]) {
-				acc[row.pointer_type] = {
-					average_duration: 0,
-					count: 0,
-				};
-			}
+	// Now recalculating the stats from the pointer_type until now
+	const groups = data.reduce((acc, row) => {
+		if (!acc[row.pointer_type]) {
+			acc[row.pointer_type] = {
+				average_duration: 0,
+				count: 0,
+			};
+		}
 
-			acc[row.pointer_type].average_duration =
-				(acc[row.pointer_type].average_duration * acc[row.pointer_type].count + row.duration) /
-				(acc[row.pointer_type].count + 1);
+		acc[row.pointer_type].average_duration =
+			(acc[row.pointer_type].average_duration * acc[row.pointer_type].count + row.duration) /
+			(acc[row.pointer_type].count + 1);
 
-			acc[row.pointer_type].count++;
+		acc[row.pointer_type].count++;
 
-			return acc;
-		}, {} as Record<string, { average_duration: number; count: number }>);
+		return acc;
+	}, {} as Record<string, { average_duration: number; count: number }>);
 
-		// Now insert the stats
-		const stats = Object.entries(groups).map(([pointer_type, { average_duration, count }]) => ({
-			type: +pointer_type,
-			average_duration,
-			count,
-		}));
+	// Now insert the stats
+	const stats = Object.entries(groups).map(([pointer_type, { average_duration, count }]) => ({
+		type: +pointer_type,
+		average_duration,
+		count,
+	}));
 
-		// Insert the stats
-		await tx.insert(schema.stats_table).values(stats);
-	});
+	// Insert the stats
+	await db.insert(schema.stats_table).values(stats);
 }
 
 await populate_new_data();
