@@ -50,7 +50,7 @@
 		background-color: #010811;
 		color: white;
 
-		padding: 3rem;
+		padding: 2rem 4rem;
 
 		display: flex;
 		flex-direction: column;
