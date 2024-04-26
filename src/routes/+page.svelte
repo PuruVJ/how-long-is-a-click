@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { draggable } from '@neodrag/svelte';
 	import { onMount } from 'svelte';
 	import { toast } from 'svelte-french-toast';
@@ -22,6 +23,10 @@
 	}
 
 	onMount(() => {
+		// Change the query param
+		$page.url.searchParams.set('t', Date.now() + '');
+		goto($page.url, { replaceState: true });
+
 		setInterval(() => {
 			invalidateAll();
 		}, 5000);
