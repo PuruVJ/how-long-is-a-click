@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -46,8 +47,10 @@
 		return async ({ update, result }) => {
 			await update();
 
-			// @ts-ignore
-			result.data.success ? toast.success(result.data.message) : toast.error(result.data.message);
+			if (dev) {
+				// @ts-ignore
+				result.data.success ? toast.success(result.data.message) : toast.error(result.data.message);
+			}
 		};
 	}}
 	method="post"
